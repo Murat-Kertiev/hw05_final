@@ -8,7 +8,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from ..models import Comment, Follow, Group, Post
+from ..models import Comment, Group, Post
 
 User = get_user_model()
 
@@ -170,39 +170,3 @@ class PostFormTests(TestCase):
                 text=form_data['text']
             ).exists()
         )
-
-    def test_follow_another_user(self):
-        """
-        Авторизованный пользователь,
-        может подписываться на других пользователей
-        """
-        follow_count = Follow.objects.count()
-        self.authorized_client.get(
-            reverse('posts:profile_follow', kwargs={'username': self.user2})
-        )
-        self.assertTrue(Follow.objects.filter(user=self.user,
-                                              author=self.user2).exists())
-        self.assertEqual(Follow.objects.count(), follow_count + 1)
-
-    def test_unfollow_another_user(self):
-        """
-        Авторизованный пользователь
-        может удалять других пользователей из подписок
-        """
-        Follow.objects.create(user=self.user, author=self.user2)
-        follow_count = Follow.objects.count()
-        self.assertTrue(Follow.objects.filter(user=self.user,
-                                              author=self.user2).exists())
-        self.authorized_client.get(
-            reverse(
-                'posts:profile_unfollow',
-                kwargs={'username': self.user2}
-            )
-        )
-        self.assertFalse(
-            Follow.objects.filter(
-                user=self.user,
-                author=self.user2
-            ).exists()
-        )
-        self.assertEqual(Follow.objects.count(), follow_count - 1)

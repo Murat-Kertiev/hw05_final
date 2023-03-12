@@ -4,6 +4,7 @@
       <li class="nav-item">
         <a 
           class="nav-link {% if index %}active{% endif %}"
+          style="background: black; color: #fff; border-color: black;"
           href="{% url 'posts:index' %}"
         >
           Все авторы
@@ -12,7 +13,9 @@
       <li class="nav-item">
         <a 
            class="nav-link {% if follow %}active{% endif %}"
-           href="{% url 'posts:follow_index' %}"
+           style="background: black; color: #fff; border-color: black;"
+           href="{% url 'posts:follow_index' %}
+           "
         >
           Избранные авторы
         </a>

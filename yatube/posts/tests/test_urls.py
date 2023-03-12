@@ -88,7 +88,6 @@ class PostURLTests(TestCase):
                 response = self.author_client.get(url)
                 self.assertTemplateUsed(response, template)
                 self.assertEqual(response.status_code, HTTPStatus.OK)
-                print()
 
     def test_add_comment_for_quest(self):
         """Форма комментарий не доступна неавторизованному пользователю"""

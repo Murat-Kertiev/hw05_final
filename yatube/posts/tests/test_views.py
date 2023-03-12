@@ -7,6 +7,7 @@ from django.urls import reverse
 from ..models import Comment, Follow, Group, Post
 
 User = get_user_model()
+
 TEST_OF_POST: int = 13
 
 
@@ -154,6 +155,42 @@ class ViewsTests(TestCase):
             self.post.text,
             response.context['page_obj'].object_list
         )
+
+    def test_unfollow_another_user(self):
+        """
+        Авторизованный пользователь
+        может удалять других пользователей из подписок
+        """
+        Follow.objects.create(user=self.user, author=self.user2)
+        follow_count = Follow.objects.count()
+        self.assertTrue(Follow.objects.filter(user=self.user,
+                                              author=self.user2).exists())
+        self.authorized_client.get(
+            reverse(
+                'posts:profile_unfollow',
+                kwargs={'username': self.user2}
+            )
+        )
+        self.assertFalse(
+            Follow.objects.filter(
+                user=self.user,
+                author=self.user2
+            ).exists()
+        )
+        self.assertEqual(Follow.objects.count(), follow_count - 1)
+
+    def test_follow_another_user(self):
+        """
+        Авторизованный пользователь,
+        может подписываться на других пользователей
+        """
+        follow_count = Follow.objects.count()
+        self.authorized_client.get(
+            reverse('posts:profile_follow', kwargs={'username': self.user2})
+        )
+        self.assertTrue(Follow.objects.filter(user=self.user,
+                                              author=self.user2).exists())
+        self.assertEqual(Follow.objects.count(), follow_count + 1)
 
 
 class PaginatorViewsTest(TestCase):
