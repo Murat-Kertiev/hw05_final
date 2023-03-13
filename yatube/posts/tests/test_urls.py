@@ -30,7 +30,6 @@ class PostURLTests(TestCase):
             f'/group/{cls.group.slug}/': 'posts/group_list.html',
             f'/profile/{cls.user.username}/': 'posts/profile.html',
             f'/posts/{cls.post.id}/': 'posts/post_detail.html',
-            '/post/': 'post/post_detail.html'
         }
 
     def setUp(self):
@@ -44,11 +43,12 @@ class PostURLTests(TestCase):
         """Страницы доступна любому пользователю."""
         for url in self.public_urls.keys():
             with self.subTest(url=url):
-                status = HTTPStatus.OK
                 response = self.guest_client.get(url)
-                if response.status_code == 404:
-                    status = HTTPStatus.NOT_FOUND
-                self.assertEqual(response.status_code, status)
+                self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_nonexistent_url_return_404(self):
+        response = self.guest_client.get('/post/')
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
     def test_urls_for_authorized_client(self):
         """Страница /create/ доступная авторизованному пользователю"""

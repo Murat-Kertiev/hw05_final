@@ -71,7 +71,7 @@ class ViewsTests(TestCase):
             reverse('posts:post_detail', kwargs={'post_id': self.post.id})
         )
         post_text_0 = {
-            response.context['post'].text: 'Тестовый пост',
+            response.context['post'].text: self.post.text,
             response.context['post'].group: self.group,
             response.context['post'].author: self.user.username
         }
