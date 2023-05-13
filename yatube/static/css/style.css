@@ -1,0 +1,114 @@
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
+.btn-follow{
+    background-color: #02aa02;
+    border-color: #02be02;
+    color: white;
+    border-radius: 10px;
+}
+.btn-follow:hover{
+    animation: bounce 1s;
+    background-color: #006e00;
+    color: white;
+}
+.btn-unfollow{
+    background-color: rgb(192, 3, 3);
+    border-color: rgb(192, 3, 3);
+    color: white;
+    border-radius: 10px;
+}
+.btn-unfollow:hover{
+    animation: bounce 1s;
+    background-color: rgb(100, 2, 2);
+    border-color: rgb(100, 2, 2);
+    color: white;
+}
+
+.btn-create{
+    background-color: #32CD32;
+    border-color: #32CD32;
+    color: white;
+    border-radius: 10px;
+}
+.btn-create:hover{
+    animation: bounce 1s;
+    background-color: #008000;
+    color: white;
+}
+
+.href-btn{
+    display: inline-block; /* Строчно-блочный элемент */ 
+    background: rgb(0, 190, 228); /* Серый цвет фона */
+    color: white; /* Белый цвет текста */
+    padding: 0.6rem 1.1rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 10px; /* Скругляем уголки */
+    transition: 0.5s;
+}
+.href-btn:hover{
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-comment{
+    background: rgb(0, 190, 228);
+    transition: 0.5s;
+    color: white;
+    border-radius: 10px;
+}
+.btn-comment:hover {
+    background-color: black;
+    transform: scale(1.1);
+    color: white;
+}
+
+nav.navbar-light{
+    background-color: rgb(0, 190, 228);
+}
+
+.nav-link {
+    transition: 0.5s;
+}
+.nav-link:hover{
+    background-color: black;
+    color: white;
+}
+
+.span {
+    font-style: oblique;
+    font-weight: 700;
+}
+
+.span-name {
+    font-style: oblique;
+}
+
+.btn-author {
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.btn-author:hover {
+    display: inline-block; 
+    background: black; 
+    color: white;
+    padding: 0.6rem 1.1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.5s;
+}

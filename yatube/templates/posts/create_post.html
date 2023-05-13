@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load user_filters %}
 {% block title %}
   {% if is_edit %}
     Редактировать пост
@@ -12,28 +13,14 @@
     <div class="col-md-8 p-5">
       <div class="card">
         <div class="card-header">       
-          {% if is_edit %}
+        {% if is_edit %}
           Редактировать пост
         {% else %}
           Новый пост
         {% endif %}            
         </div>
         <div class="card-body">
-          {% load user_filters %}
-              {% if form.errors %}
-                  {% for field in form %} 
-                    {% for error in field.errors %}            
-                      <div class="alert alert-danger">
-                        {{ error|escape }}
-                      </div>
-                    {% endfor %}
-                  {% endfor %}
-                  {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                      {{ error|escape }}
-                    </div>
-                  {% endfor %}
-              {% endif %}        
+          {% include 'posts/includes/error_form.html'%}
           <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
 
@@ -57,9 +44,7 @@
                 </div>
               {% endfor %}
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary" 
-              style="background: black; border-color: black;"
-              >
+              <button type="submit" class="btn btn-create">
                 {% if is_edit %}
                   Сохранить
                 {% else %}

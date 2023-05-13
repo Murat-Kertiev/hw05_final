@@ -1,11 +1,11 @@
 <ul>
-    <li >
-      <span style="font-weight: 700; font-style: oblique;" >Автор:</span>
-        <a href="{% url 'posts:profile' post.author.username %}" style="text-decoration: none;">
-          <span style="font-style: oblique;">{{ post.author.get_full_name }}</span>
-        </a>
-    </li>
-    <li style="font-style: oblique">
-      <span style="font-weight: 700">Дата публикации:</span>   {{ post.pub_date|date:"d E Y" }}
-    </li>
+  <li>
+    <span class="span">Автор:</span>
+    <a class="btn-author" href="{% url 'posts:profile' post.author.username %}">
+      <span class="span-name">{{ post.author.get_full_name }}</span>
+    </a>
+  </li>
+  <li>
+    <span class="span">Дата публикации:</span> <span class="span-name">{{ post.pub_date|date:"d E Y" }}</span>
+  </li>
 </ul>

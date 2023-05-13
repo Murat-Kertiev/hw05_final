@@ -9,8 +9,7 @@
         <div class="form-group mb-2">
           {{ form.text|addclass:"form-control" }}
         </div>
-        <button type="submit" class="btn btn-primary" 
-        style="background: black; color: #fff; border: none">Отправить</button>
+        <button type="submit" class="btn btn-comment">Отправить</button>
       </form>
     </div>
   </div>
@@ -20,8 +19,7 @@
   <div class="media mb-4">
     <div class="media-body">
       <h5 class="mt-0">
-        <a href="{% url 'posts:profile' comment.author.username %}" 
-        style="font-style: oblique;">
+        <a class='btn-author' href="{% url 'posts:profile' comment.author.username %}">
           {{ comment.author.username }}
         </a>
       </h5>

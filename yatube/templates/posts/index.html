@@ -1,30 +1,21 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
 {% load cache %}
-{% block title %}
-Последние обновления на сайте
-{% endblock %}
+{% block title %}Последние обновления на сайте{% endblock %}
 {% block content %}
 {% include 'posts/includes/switcher.html' %}
     {% cache 20 index_page %}
       {% for post in page_obj %}
         <article>
           {% include 'includes/ul.html'%}
-          {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
-            <img class="card-img my-2" src="{{ im.url }}">
-          {% endthumbnail %}
+          {% include 'posts/includes/image.html' %}
           <p>{{ post.text|linebreaksbr }}<br></p>
           <p>
-            <a button class="btn btn" style="background: black; color: #fff;" 
-              href="{% url 'posts:post_detail' post.pk %}">подробная информация
-            </a>
+            <a class="href-btn" href="{% url 'posts:post_detail' post.pk %}">подробная информация<a/>
           </p>
           {% if post.group %}
-            <a button class="btn btn" style="background: black; color: #fff;"
-                href="{% url 'posts:group_list' post.group.slug %}">все записи группы
-            </a>
+            <a class="href-btn" href="{% url 'posts:group_list' post.group.slug %}">все записи группы<a/>
           {% endif %}
-          {% if not forloop.last %}<hr style="color: #C0C0C0;">{% endif %}
+          {% if not forloop.last %}<hr>{% endif %}
         </article>
       {% endfor %} 
       {% include 'posts/includes/paginator.html' %}
